@@ -27,6 +27,9 @@ rust_defaults {
 rust_test_host {
     name: "matches_host_test_lib",
     defaults: ["matches_defaults"],
+    test_options: {
+        unit_test: true,
+    },
 }
 
 rust_test {
@@ -50,6 +53,9 @@ rust_defaults {
 rust_test_host {
     name: "matches_host_test_tests_macro_use_one",
     defaults: ["matches_defaults_macro_use_one"],
+    test_options: {
+        unit_test: true,
+    },
 }
 
 rust_test {
