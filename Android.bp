@@ -23,6 +23,8 @@ rust_library {
     // has rustc warnings
     host_supported: true,
     crate_name: "matches",
+    cargo_env_compat: true,
+    cargo_pkg_version: "0.1.9",
     srcs: ["lib.rs"],
     edition: "2015",
     apex_available: [
@@ -33,10 +35,12 @@ rust_library {
 }
 
 rust_defaults {
-    name: "matches_defaults",
+    name: "matches_test_defaults",
     crate_name: "matches",
     // has rustc warnings
     srcs: ["lib.rs"],
+    cargo_env_compat: true,
+    cargo_pkg_version: "0.1.9",
     test_suites: ["general-tests"],
     auto_gen_config: true,
     edition: "2015",
@@ -44,7 +48,7 @@ rust_defaults {
 
 rust_test_host {
     name: "matches_host_test_lib",
-    defaults: ["matches_defaults"],
+    defaults: ["matches_test_defaults"],
     test_options: {
         unit_test: true,
     },
@@ -52,14 +56,14 @@ rust_test_host {
 
 rust_test {
     name: "matches_device_test_lib",
-    defaults: ["matches_defaults"],
+    defaults: ["matches_test_defaults"],
 }
 
 rust_defaults {
-    name: "matches_defaults_macro_use_one",
-    crate_name: "macro_use_one",
-    // has rustc warnings
-    srcs: ["tests/macro_use_one.rs"],
+    name: "matches_test_defaults_matches",
+    crate_name: "matches",
+    cargo_env_compat: true,
+    cargo_pkg_version: "0.1.9",
     test_suites: ["general-tests"],
     auto_gen_config: true,
     edition: "2015",
@@ -70,7 +74,9 @@ rust_defaults {
 
 rust_test_host {
     name: "matches_host_test_tests_macro_use_one",
-    defaults: ["matches_defaults_macro_use_one"],
+    defaults: ["matches_test_defaults_matches"],
+    // has rustc warnings
+    srcs: ["tests/macro_use_one.rs"],
     test_options: {
         unit_test: true,
     },
@@ -78,5 +84,24 @@ rust_test_host {
 
 rust_test {
     name: "matches_device_test_tests_macro_use_one",
-    defaults: ["matches_defaults_macro_use_one"],
+    defaults: ["matches_test_defaults_matches"],
+    // has rustc warnings
+    srcs: ["tests/macro_use_one.rs"],
+}
+
+rust_test_host {
+    name: "matches_host_test_tests_use_star",
+    defaults: ["matches_test_defaults_matches"],
+    // has rustc warnings
+    srcs: ["tests/use_star.rs"],
+    test_options: {
+        unit_test: true,
+    },
+}
+
+rust_test {
+    name: "matches_device_test_tests_use_star",
+    defaults: ["matches_test_defaults_matches"],
+    // has rustc warnings
+    srcs: ["tests/use_star.rs"],
 }
